@@ -1,0 +1,22 @@
+apiVersion: kro.run/v1alpha1
+kind: AzureAksAsoDeployment
+metadata:
+  name: red-team-cluster
+  annotations:
+    serviceoperator.azure.com/credential-from: aso-credentials
+spec:
+  name: red-team-cluster
+  namespace: red-team-cluster
+  location: westus3
+  cluster: red-team-cluster
+---
+apiVersion: kro.run/v1alpha1
+kind: ArgoAppsDeployment
+metadata:
+  name: red-team-apps
+  annotations:
+    serviceoperator.azure.com/credential-from: aso-credentials
+spec:
+  name: red-team-apps
+  namespace: red-team-cluster
+  repoURL: https://github.com/Azure-Samples/aks-store-demo.git
