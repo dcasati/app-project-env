@@ -1,0 +1,10 @@
+apiVersion: kro.run/v1alpha1
+kind: AzureResourceGroup
+metadata:
+  name: rg-test
+  annotations:
+    serviceoperator.azure.com/credential-from: aso-credentials
+spec:
+  name: rg-test
+  namespace: red-team-cluster
+  location: westus2
