@@ -1,0 +1,26 @@
+apiVersion: resources.azure.com/v1api20200601
+kind: ResourceGroup
+metadata:
+  name: app-rg
+  namespace: default
+spec:
+  location: westus3
+
+---
+apiVersion: keyvault.azure.com/v1api20210401preview
+kind: Vault
+metadata:
+  name: app-keyvault
+  namespace: default
+spec:
+  location: westus3
+  owner:
+    name: app-rg
+    kind: ResourceGroup
+  properties:
+    tenantId: de060cb6-6b37-489b-8a6e-c078c6dbeb09
+    sku:
+      family: "A"
+      name: "standard"
+    accessPolicies: []
+    enableSoftDelete: true
