@@ -26,5 +26,28 @@ spec:
     sku:
       family: "A"
       name: "standard"
-    accessPolicies: []
+    accessPolicies:
+      - tenantId: de060cb6-6b37-489b-8a6e-c078c6dbeb09
+        objectId: 2c2ccac9-ca54-435a-babd-ffb9c59089c1  # User or Service Principal Object ID
+        permissions:
+          secrets:
+            - get
+            - list
+            - set
     enableSoftDelete: true
+    enablePurgeProtection: false
+
+---
+apiVersion: keyvault.azure.com/v1api20210401preview
+kind: Secret
+metadata:
+  name: app-secret
+  namespace: rg-dev-app
+  annotations:
+    serviceoperator.azure.com/credential-from: rg-dev-app-aso-credentials
+spec:
+  owner:
+    name: app-keyvault
+    kind: Vault
+  properties:
+    value: "c2VjcmV0LXZhbHVlLWJhc2U2NA=="  # Base64 for 'secret-value-base64'
