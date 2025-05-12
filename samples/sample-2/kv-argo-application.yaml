@@ -35,8 +35,6 @@ spec:
             - list
             - set
     enableSoftDelete: true
-    enablePurgeProtection: false
-
 ---
 apiVersion: keyvault.azure.com/v1api20210401preview
 kind: Secret
