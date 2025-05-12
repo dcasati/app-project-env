@@ -1,8 +1,10 @@
 apiVersion: resources.azure.com/v1api20200601
 kind: ResourceGroup
 metadata:
-  name: app-rg
-  namespace: default
+  name: rg-dev-app
+  namespace: rg-dev-app
+  annotations:
+    serviceoperator.azure.com/credential-from: rg-dev-app-aso-credentials
 spec:
   location: westus3
 
@@ -11,11 +13,13 @@ apiVersion: keyvault.azure.com/v1api20210401preview
 kind: Vault
 metadata:
   name: app-keyvault
-  namespace: default
+  namespace: rg-dev-app
+  annotations:
+    serviceoperator.azure.com/credential-from: rg-dev-app-aso-credentials
 spec:
   location: westus3
   owner:
-    name: app-rg
+    name: rg-dev-app
     kind: ResourceGroup
   properties:
     tenantId: de060cb6-6b37-489b-8a6e-c078c6dbeb09
