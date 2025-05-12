@@ -9,7 +9,7 @@ spec:
   location: westus3
 
 ---
-apiVersion: keyvault.azure.com/v1api20210401preview
+apiVersion: keyvault.azure.com/v1api20230701
 kind: Vault
 metadata:
   name: app-keyvault
@@ -36,7 +36,7 @@ spec:
             - set
     enableSoftDelete: true
 ---
-apiVersion: keyvault.azure.com/v1api20210401preview
+apiVersion: keyvault.azure.com/v1api20230701
 kind: Secret
 metadata:
   name: app-secret
