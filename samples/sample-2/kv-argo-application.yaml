@@ -12,7 +12,7 @@ spec:
 apiVersion: keyvault.azure.com/v1api20230701
 kind: Vault
 metadata:
-  name: app-keyvault
+  name: app-keyvault-2199
   namespace: rg-dev-app
   annotations:
     serviceoperator.azure.com/credential-from: rg-dev-app-aso-credentials
