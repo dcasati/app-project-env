@@ -42,6 +42,8 @@ spec:
           - repoURL: https://github.com/dcasati/app-project-env.git
             path: argocd-apps
             targetRevision: HEAD
+            directory:
+              recurse: true
         destination:
           server: https://kubernetes.default.svc
           namespace: default
