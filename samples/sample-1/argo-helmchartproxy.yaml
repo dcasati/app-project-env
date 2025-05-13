@@ -40,7 +40,7 @@ spec:
         project: default
         sources:
           - repoURL: https://github.com/dcasati/app-project-env.git
-            path: argo-apps
+            path: argocd-apps
             targetRevision: HEAD
         destination:
           server: https://kubernetes.default.svc
