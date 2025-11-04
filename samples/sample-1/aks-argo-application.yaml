@@ -44,6 +44,12 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+    ignoreDifferences:
+      - group: cluster.x-k8s.io
+        kind: ClusterClass
+        jsonPointers:
+          - /spec/patches
     retry:
       limit: -1
       backoff:
