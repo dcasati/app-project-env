@@ -6,17 +6,17 @@ metadata:
   annotations:
     serviceoperator.azure.com/credential-from: rg-dev-app-aso-credentials
 spec:
-  location: 
+  location: eastus
 ---
 apiVersion: keyvault.azure.com/v1api20210401preview
 kind: Vault
 metadata:
-  name: app-keyvault-32096
+  name: app-keyvault-12917
   namespace: rg-dev-app
   annotations:
     serviceoperator.azure.com/credential-from: rg-dev-app-aso-credentials
 spec:
-  location: 
+  location: eastus
   owner:
     name: rg-dev-app
     kind: ResourceGroup
