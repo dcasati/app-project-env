@@ -1,0 +1,72 @@
+apiVersion: addons.cluster.x-k8s.io/v1alpha1
+kind: HelmChartProxy
+metadata:
+  name: argocd
+  namespace: default
+spec:
+  clusterSelector:
+    matchLabels:
+      deploy-argocd: "true"
+  repoURL: https://argoproj.github.io/argo-helm
+  chartName: argo-cd
+  releaseName: argocd
+  namespace: argocd
+  options:
+    waitForJobs: true
+    wait: true
+    timeout: 5m
+    install:
+      createNamespace: true
+---
+apiVersion: addons.cluster.x-k8s.io/v1alpha1
+kind: HelmChartProxy
+metadata:
+  name: argocd-app
+  namespace: default
+spec:
+  clusterSelector:
+    matchLabels:
+      deploy-argocd: "true"
+  repoURL: https://argoproj.github.io/argo-helm
+  chartName: argocd-apps
+  releaseName: argocd-apps
+  namespace: argocd
+  options:
+    waitForJobs: true
+    wait: true
+    timeout: 5m
+    install:
+      createNamespace: true
+  valuesTemplate: |
+    applications:
+      shared-team-cluster-apps:
+        namespace: argocd
+        finalizers:
+          - resources-finalizer.argocd.argoproj.io
+        project: default
+        sources:
+          - repoURL: https://github.com/dcasati/app-project-env-kubecon.git
+            path: argocd-apps
+            targetRevision: HEAD
+            directory:
+              recurse: true
+              exclude: namespaces/**
+        destination:
+          server: https://kubernetes.default.svc
+          namespace: argocd
+      cluster-namespaces:
+        namespace: argocd
+        project: default
+        source:
+          repoURL: https://github.com/dcasati/app-project-env-kubecon.git
+          path: argocd-apps/namespaces
+          targetRevision: HEAD
+        destination:
+          server: https://kubernetes.default.svc
+          namespace: default
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
